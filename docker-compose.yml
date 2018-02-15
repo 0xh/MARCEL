@@ -29,8 +29,8 @@ services:
     ports:
       - 8091:8091
     volumes:
-      - ./backend/data:/auth-backend/data
-      - ./auth:/auth-backend/config:ro
+      - ./backend/data:/var/lib/marcel-auth-backend/data
+      - ./auth:/etc/marcel-auth-backend/config:ro
 
   backend:
     depends_on:
