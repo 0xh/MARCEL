@@ -147,29 +147,32 @@ jobs:
 
   backend_docker_build:
     <<: *defaults
-    working_directory: /tmp/backend
+    working_directory: /tmp/project
     docker:
       - image: circleci/buildpack-deps:xenial-scm
     steps:
+      - checkout
       - setup_remote_docker
       - attach_workspace:
-          at: /tmp
-      - run: docker build -t zenika/marcel-backend:dev .
-      - run: docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-      - run: docker push zenika/marcel-backend:dev
+          at: /tmp/workspace
+      - run: ls ${CIRCLE_WORKING_DIRECTORY}
+      - run: 
+          command: ${CIRCLE_WORKING_DIRECTORY}/scripts/docker_build.sh zenika/marcel-backend
+          working_directory: /tmp/workspace/backend
 
   auth_backend_docker_build:
     <<: *defaults
-    working_directory: /tmp/auth-backend
+    working_directory: /tmp/project
     docker:
       - image: circleci/buildpack-deps:xenial-scm
     steps:
+      - checkout
       - setup_remote_docker
       - attach_workspace:
-          at: /tmp
-      - run: docker build -t zenika/marcel-auth:dev .
-      - run: docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-      - run: docker push zenika/marcel-auth:dev
+          at: /tmp/workspace
+      - run: 
+          command: ${CIRCLE_WORKING_DIRECTORY}/scripts/docker_build.sh zenika/marcel-auth
+          working_directory: /tmp/workspace/auth-backend
 
   backoffice_docker_build:
     docker:
@@ -181,10 +184,8 @@ jobs:
           keys:
             - backoffice-build-{{ .Revision }}
       - run:
-          command: docker build -t zenika/marcel-backoffice:dev .
+          command: ../scripts/docker_build.sh zenika/marcel-backoffice
           working_directory: back-office
-      - run: docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-      - run: docker push zenika/marcel-backoffice:dev
 
   frontend_docker_build:
     docker:
@@ -196,11 +197,8 @@ jobs:
           keys:
             - frontend-build-{{ .Revision }}
       - run:
-          command: docker build -t zenika/marcel-frontend:dev .
+          command: ../scripts/docker_build.sh zenika/marcel-frontend
           working_directory: frontend
-      - run: docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-      - run: docker push zenika/marcel-frontend:dev
-
 
   deploy_integration:
     docker:
