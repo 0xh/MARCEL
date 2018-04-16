@@ -1,7 +1,9 @@
-test_env/
+.vscode
+config/config.json
+cookies
 data/medias.json
 data/plugins.json
 marcel.log
 start-dev.sh
-.vscode
+test_env/
 vendor/

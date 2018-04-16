@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Zenika/MARCEL/auth-backend/conf"
+	"github.com/Zenika/MARCEL/backend/auth/conf"
 	jwt "github.com/dgrijalva/jwt-go"
 )
 
