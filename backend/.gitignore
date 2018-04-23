@@ -1,8 +1,6 @@
 .vscode
 config/config.json
 cookies
-data/medias.json
-data/plugins.json
 marcel.log
 start-dev.sh
 test_env/

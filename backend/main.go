@@ -13,12 +13,13 @@
 // swagger:meta
 package main
 
-import "github.com/Zenika/MARCEL/backend/app"
+import (
+	"github.com/Zenika/MARCEL/backend/cmd"
+
+	// Import subcommands
+	_ "github.com/Zenika/MARCEL/backend/auth/cmd"
+)
 
 func main() {
-
-	a := new(app.App)
-	a.Initialize()
-
-	a.Run(":8090")
+	cmd.Cmd.Execute()
 }

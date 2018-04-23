@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/Zenika/MARCEL/backend/auth/auth/middleware"
 	"github.com/Zenika/MARCEL/backend/apidoc"
+	"github.com/Zenika/MARCEL/backend/auth/auth/middleware"
 	"github.com/Zenika/MARCEL/backend/clients"
 	"github.com/Zenika/MARCEL/backend/medias"
 	"github.com/Zenika/MARCEL/backend/plugins"
